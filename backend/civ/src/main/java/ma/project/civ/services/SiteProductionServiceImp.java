@@ -21,7 +21,7 @@ public class SiteProductionServiceImp implements SiteProductionService {
     public List<SiteProductionDTO> findAll() {
         return siteProductionRepository.findAll()
                 .stream()
-                .map(siteProductionMapper::toDTO)
+                .map(siteProductionMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -29,14 +29,14 @@ public class SiteProductionServiceImp implements SiteProductionService {
     public SiteProductionDTO findById(Long id) {
         SiteProductionHabilitation siteProduction = siteProductionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("SiteProduction not found"));
-        return siteProductionMapper.toDTO(siteProduction);
+        return siteProductionMapper.toDto(siteProduction);
     }
 
     @Override
     public SiteProductionDTO save(SiteProductionDTO siteProductionDTO) {
         SiteProductionHabilitation siteProduction = siteProductionMapper.toEntity(siteProductionDTO);
         SiteProductionHabilitation savedSiteProduction = siteProductionRepository.save(siteProduction);
-        return siteProductionMapper.toDTO(savedSiteProduction);
+        return siteProductionMapper.toDto(savedSiteProduction);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class SiteProductionServiceImp implements SiteProductionService {
                 .orElseThrow(() -> new RuntimeException("SiteProduction not found"));
         existingSiteProduction.setNom(siteProductionDTO.getNom());
         SiteProductionHabilitation updatedSiteProduction = siteProductionRepository.save(existingSiteProduction);
-        return siteProductionMapper.toDTO(updatedSiteProduction);
+        return siteProductionMapper.toDto(updatedSiteProduction);
     }
 
     @Override

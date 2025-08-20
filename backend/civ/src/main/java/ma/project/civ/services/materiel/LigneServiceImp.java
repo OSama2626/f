@@ -21,7 +21,7 @@ public class LigneServiceImp implements LigneService {
     public List<LigneDTO> findAll() {
         return ligneRepository.findAll()
                 .stream()
-                .map(ligneMapper::toDTO)
+                .map(ligneMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -29,14 +29,14 @@ public class LigneServiceImp implements LigneService {
     public LigneDTO findById(Long id) {
         Ligne ligne = ligneRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ligne not found"));
-        return ligneMapper.toDTO(ligne);
+        return ligneMapper.toDto(ligne);
     }
 
     @Override
     public LigneDTO save(LigneDTO ligneDTO) {
         Ligne ligne = ligneMapper.toEntity(ligneDTO);
         Ligne savedLigne = ligneRepository.save(ligne);
-        return ligneMapper.toDTO(savedLigne);
+        return ligneMapper.toDto(savedLigne);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class LigneServiceImp implements LigneService {
         existingLigne.setDestination(ligneDTO.getDestination());
         existingLigne.setDistance(ligneDTO.getDistance());
         Ligne updatedLigne = ligneRepository.save(existingLigne);
-        return ligneMapper.toDTO(updatedLigne);
+        return ligneMapper.toDto(updatedLigne);
     }
 
     @Override
