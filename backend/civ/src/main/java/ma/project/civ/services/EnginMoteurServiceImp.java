@@ -21,7 +21,7 @@ public class EnginMoteurServiceImp implements EnginMoteurService {
     public List<EnginMoteurDTO> findAll() {
         return enginMoteurRepository.findAll()
                 .stream()
-                .map(enginMoteurMapper::toDTO)
+                .map(enginMoteurMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -29,7 +29,7 @@ public class EnginMoteurServiceImp implements EnginMoteurService {
     public EnginMoteurDTO findById(Long id) {
         EnginMoteurHabilitation enginMoteur = enginMoteurRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("EnginMoteur not found"));
-        return enginMoteurMapper.toDTO(enginMoteur);
+        return enginMoteurMapper.toDto(enginMoteur);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EnginMoteurServiceImp implements EnginMoteurService {
         enginMoteur.setSerie(enginMoteurDTO.getSerie());
         enginMoteur.setNumero(enginMoteurDTO.getNumero());
         EnginMoteurHabilitation savedEnginMoteur = enginMoteurRepository.save(enginMoteur);
-        return enginMoteurMapper.toDTO(savedEnginMoteur);
+        return enginMoteurMapper.toDto(savedEnginMoteur);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class EnginMoteurServiceImp implements EnginMoteurService {
         existingEnginMoteur.setNumero(enginMoteurDTO.getNumero());
 
         EnginMoteurHabilitation updatedEnginMoteur = enginMoteurRepository.save(existingEnginMoteur);
-        return enginMoteurMapper.toDTO(updatedEnginMoteur);
+        return enginMoteurMapper.toDto(updatedEnginMoteur);
     }
 
     @Override

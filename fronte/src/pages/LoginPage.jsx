@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-const LoginPage = ({ onLogin }) => {
+import axios from 'axios';
+
+const LoginPage = () => {
   const [form, setForm] = useState({
     matricule: '',
     password: '',
@@ -18,27 +19,38 @@ const LoginPage = ({ onLogin }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    // setLoading(true);
-    // setError(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    // console.log(form.matricule)
-    // console.log(form.password)
-    // // Exemple de vérification simplifiée
-    // if (form.username == 'admin' && form.password == 'oncf123') {
-    //   // setTimeout(() => {
-    //   //   onLogin(); // Appel du callback
-    //   //   setLoading(false);
-        
-    //   // }, 800);
-    //   console.log('sxdrcfvgbhnj,k')
-      
-    // } else {
-    //   setError("Matricule ou mot de passe incorrect");
-    //   setLoading(false);
-    // }
-    navigate('/dashboard');
+    try {
+      const response = await axios.post('/login', form);
+      const { access_token, refresh_token, role } = response.data;
+
+      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('refresh_token', refresh_token);
+      localStorage.setItem('role', role);
+
+      setLoading(false);
+
+      // Redirect based on role
+      switch (role) {
+        case 'ADMIN':
+          navigate('/dashboard');
+          break;
+        case 'ADMIN_ETABLISSEMENT':
+          navigate('/admin-etablissement/dashboard');
+          break;
+        default:
+          // Handle other roles or a default redirect
+          navigate('/');
+          break;
+      }
+    } catch (err) {
+      setError(err.response?.data || 'Matricule ou mot de passe incorrect');
+      setLoading(false);
+    }
   };
 
   return (

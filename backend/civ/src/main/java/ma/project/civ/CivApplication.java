@@ -51,13 +51,13 @@ public class CivApplication {
             // etablissement.setNom("etablissement_7");
             // etablissementRepository.save(etablissement);
 
-//             Admin user = new Admin();
-//             user.setMatricule("admin1");
-//             user.setPassword(passwordEncoder.encode("1234"));
-//             user.setNom("test1");
-//             user.setPrenom("test1");
-//             user.setEmail("<EMAIL11>");
-//             adminRepository.save(user);
+             Admin user = new Admin();
+             user.setMatricule("admin");
+             user.setPassword(passwordEncoder.encode("oncf123"));
+             user.setNom("test1");
+             user.setPrenom("test1");
+             user.setEmail("admin@email.com");
+             adminRepository.save(user);
 
             // AdminEtablissement user1 = new AdminEtablissement();
             // user1.setMatricule("admin_etablissementA6");

@@ -18,7 +18,7 @@ public interface EnginMoteurMapper extends GenericMapper<EnginMoteurHabilitation
     @Mappings({
             @Mapping(source = "discriminatorValue", target = "type")
     })
-    EnginMoteurDTO toDTO(EnginMoteurHabilitation enginMoteurHabilitation);
+    EnginMoteurDTO toDto(EnginMoteurHabilitation enginMoteurHabilitation);
 
     @ObjectFactory
     default EnginMoteurHabilitation toEntity(EnginMoteurDTO dto, @TargetType Class<EnginMoteurHabilitation> type) {

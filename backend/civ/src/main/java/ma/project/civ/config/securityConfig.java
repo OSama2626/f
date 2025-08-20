@@ -46,9 +46,8 @@ public class securityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
-                .formLogin(withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/refreshToken/**", "/admin_etablissement/**").permitAll()
+                        .requestMatchers("/", "/index.html", "/static/**", "/login", "/refreshToken/**", "/admin_etablissement/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilter(new jwtAuthenticationFilter(authManager))
                 .addFilterBefore(new jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
